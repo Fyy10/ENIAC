@@ -3,11 +3,12 @@
 int gcd(int a,int b);
 int main()
 {
-	int x,y,m,n,l,ans=0;
+	int x,y,m,n,l,ans;
 	while(scanf("%d%d%d%d%d",&x,&y,&m,&n,&l)==5)
-	{
-		if(gcd(abs(m-n),l)%abs(x-y)==0)
+	{ 
+		if(abs(x-y)%gcd(abs(m-n),l)==0)
 		{
+			ans=0;
 			while(1)
 			{
 				ans+=1;
@@ -19,6 +20,7 @@ int main()
 		else
 			printf("Impossible\n");
 	}
+	return 0;
 }
 int gcd(int a,int b)
 {
