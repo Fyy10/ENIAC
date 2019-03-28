@@ -1,0 +1,43 @@
+#include<stdio.h>
+int main()
+{
+	int n,i,j,k,ansarr[100],guessarr[100],judgeend,a,b;
+	scanf("%d",&n);
+	for(i=1;i<=n;++i)
+	{
+		scanf("%d",&ansarr[i]);
+	}
+	while(1)
+	{
+		a=0;
+		b=0;
+		judgeend=1;
+		for(i=1;i<=n;++i)
+		{
+			scanf("%d",&guessarr[i]);
+			if(guessarr[i]!=0)
+				judgeend=0;
+		}
+		if(judgeend)
+			break;
+		for(i=1;i<=n;++i)
+		{
+			if(ansarr[i]==guessarr[i])
+				++a;
+			else
+				for(j=1;j<=n;++j)
+				{
+					if(j!=i&&ansarr[j]!=guessarr[j]&&guessarr[i]==ansarr[j])
+					{
+						++b;
+						for(k=i;k<=n;++k)
+							if((guessarr[k]==ansarr[j])&&(guessarr[k]!=ansarr[k]))
+								guessarr[k]=0;
+						break;
+					}
+				}
+		}
+		printf("(%d,%d)\n",a,b);
+	}
+	return 0;
+}
