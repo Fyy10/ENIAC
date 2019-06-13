@@ -2,12 +2,10 @@
 #include<string.h>
 #define INF 20000000
 int roadlength[101][101];
-int weightmat[101];
 int n,m;
 void Dijkstra(int s);
 int dis[101];
 int used[101];
-int min(int a,int b);
 void init();
 int allused();
 int findmin();
@@ -36,10 +34,8 @@ void Dijkstra(int s)
 	for(i=1;i<=n;++i)
 	{
 		dis[i]=roadlength[s][i];
-		weightmat[i]=roadlength[s][i];
 	}
 	dis[s]=0;
-	weightmat[s]=0;
 	used[s]=1;
 	r=findmin();
 	while(!allused())
@@ -48,19 +44,14 @@ void Dijkstra(int s)
 		{
 			if(i==r||used[i])
 				continue;
-			if(weightmat[r]+roadlength[r][i]<weightmat[i])
+			if(dis[r]+roadlength[r][i]<dis[i])
 			{
-				weightmat[i]=weightmat[r]+roadlength[r][i];
+				dis[i]=dis[r]+roadlength[r][i];
 			}
 		}
 		r=findmin();
-		dis[r]=weightmat[r];
 		used[r]=1;
 	}
-}
-int min(int a,int b)
-{
-	return a<b?a:b;
 }
 void init()
 {
@@ -68,7 +59,6 @@ void init()
 	for(i=1;i<=n;++i)
 	{
 		roadlength[i][i]=0;
-		weightmat[i]=INF;
 		dis[i]=INF;
 		used[i]=0;
 		for(j=1;j<=n;++j)
@@ -92,9 +82,9 @@ int findmin()
 {
 	int i,mind=INF,minx;
 	for(i=1;i<=n;++i)
-		if(weightmat[i]<=mind&&!used[i])
+		if(dis[i]<=mind&&!used[i])
 		{
-			mind=weightmat[i];
+			mind=dis[i];
 			minx=i;
 		}
 	return minx; 

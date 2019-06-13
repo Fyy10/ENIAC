@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	int n,i,j,min=1000,max=0,a[101],ans=-1,tmp,judge;
+	scanf("%d",&n);
+	for(i=0;i<n;++i)
+	{
+		scanf("%d",&a[i]);
+		if(a[i]>max)
+			max=a[i];
+		if(a[i]<min)
+			min=a[i];
+	}
+	for(i=min;i<=max;++i)
+	{
+		judge=1;
+		j=0;
+		tmp=abs(i-a[j]);
+		while(!tmp)
+		{
+			++j;
+			tmp=abs(i-a[j]);
+		}
+		if(n==2)
+		{
+			tmp=abs((a[0]+a[1])/2-a[0]);
+		}
+		for(j=0;j<n;++j)
+		{
+			if(abs(i-a[j])!=tmp&&abs(i-a[j])!=0)
+				judge=0;
+		}
+		if(!judge)
+			continue;
+		ans=tmp;
+		if(max==min)
+			ans=0;
+		break;
+	}
+	printf("%d",ans);
+	return 0;
+}
