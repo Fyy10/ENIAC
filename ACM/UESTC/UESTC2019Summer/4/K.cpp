@@ -1,6 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+long long cnt2(long long a, long long b)
+{
+	return b/2 - (a-1)/2;
+}
+
+long long n1009(long long a, long long b)
+{
+	return b/1009 - (a-1)/1009;
+}
+
+long long n2018(long long a, long b)
+{
+	return b/2018 - (a-1)/2018;
+}
+
 int main()
 {
 	long long a, b, c, d;
@@ -9,26 +24,10 @@ int main()
 	while (scanf("%lld %lld %lld %lld", &a, &b, &c, &d) == 4)
 	{
 		ans = 0;
-		n = b/1009 - (a-1)/1009;
-		//cout << n << endl;
-		n1 = (n+1)/2;
-		n2 = n/2;
-		ans += (d - c + 1)/2 * n1;
-		ans += (d - c + 1) * n2;
-		n = d/1009 - (c-1)/1009;
-		//cout << n << endl;
-		n1 = (n+1)/2;
-		n2 = n/2;
-		ans += (b - a + 1)/2 * n1;
-		ans += (b - a + 1) * n2;
-		if (c <= b)
-		{
-			n = b/1009 - (c-1)/1009;
-			n1 = (n+1)/2;
-			n2 = n/2;
-			ans -= 2 * n1 * n2;
-			ans -= n2 * n2;
-		}
+		ans += n2018(a, b)*(d - c + 1);
+		ans += (n1009(a, b) - n2018(a, b))*cnt2(c, d);
+		ans += (cnt2(a, b) - n2018(a, b))*n1009(c, d);
+		ans += (b-a+1-cnt2(a, b)-n1009(a, b)+n2018(a, b))*n2018(c, d);
 		printf("%lld\n", ans);
 	}
 	return 0;

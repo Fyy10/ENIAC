@@ -1,34 +1,36 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool mat[10000][10000];
+int min2(int a, int b, int c)
+{
+	return min(min(a+b, a+c), b+c);
+}
+
+int sum2[1000];
+int sum3[1000];
 
 int main()
 {
-    int n,i;
-    int x1,x2,y1,y2;
-    while(scanf("%d",&n)==1)
-    {
-        if(n==0)
-            break;
-        memset(mat,0,sizeof(mat));
-        int ans=0;
-        for(i=0;i<n;i++)
-        {
-            scanf("%d %d %d %d",&x1,&y1,&x2,&y2);
-            for(int j=x1;j<x2;j++)
-            {
-                for(int k=y1;k<y2;k++)
-                {
-                    if(!mat[j][k])
-                    {
-                        mat[j][k]=1;
-                        ans++;
-                    }
-                }
-            }
-        }
-        cout << ans << endl;
-    }
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		int a, b, c;
+		cin >> a >> b >> c;
+		sum2[i] = min2(a, b, c);
+		sum3[i] = a + b + c;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		int ans = 0;
+		for (int j = 0; j < n; j++)
+		{
+			if (j == i)
+				continue;
+			if (sum3[i] > sum2[j] + 1)
+				ans++;
+		}
+		cout << ans << " ";
+	}
     return 0;
 }
