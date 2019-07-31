@@ -14,32 +14,11 @@ int main(int argc, char *argv[])
         ss >> seed;
     }
     srand(seed);
-	int x0 = random(0, 10), y0 = random(0, 10), xd = random(0, 10), yd = random(0, 10), state = random(1, 4);
-	cout << x0 << " " << y0 << " ";
-	switch (state)
+	int n = random(1, 100);
+	for(int i = 0; i < n; i++)
 	{
-		case 1:
-		{
-			cout << "E\n";
-			break;
-		}
-		case 2:
-		{
-			cout << "O\n";
-			break;
-		}
-		case 3:
-		{
-			cout << "N\n";
-			break;
-		}
-		case 4:
-		{
-			cout << "S\n";
-			break;
-		}
-		default:;
+		int tmp = random(1, 10000) + 100000;
+		printf("%d\n", tmp);
 	}
-	cout << xd << " " << yd << endl;
     return 0;
 }
